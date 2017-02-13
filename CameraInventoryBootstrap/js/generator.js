@@ -20,7 +20,6 @@ list.whenReady((list) => {
         const record = deepClient.record.getRecord(entries[i]);
 
         record.whenReady(() => {
-            record.set("owner", "David");
             var imgURL = record.get("image");
             if (imgURL == undefined) {
                 imgURL = "placeholder.png";
@@ -63,4 +62,8 @@ list.whenReady((list) => {
             $("#cardWrapper").append(columWrapper);
         });
     }
+    const record = deepClient.record.getRecord(entries[0]);
+    record.set("rfid", 54321);
+    console.log(record);
+
 });

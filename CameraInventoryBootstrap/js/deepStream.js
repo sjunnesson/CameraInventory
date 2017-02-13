@@ -39,5 +39,12 @@ function updateData(record) {
     if (record.get("model") == "EF 24-70mm f/2.8L II USM") {
         record.set("image", "canon24-70.jpg");
     }
+}
+
+function setRFID(record, ID) {
+    record.set("rfid", ID);
+}
+
+function checkOutEquipment(equipmentID, userID) {
 
 }

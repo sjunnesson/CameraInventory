@@ -17,5 +17,7 @@
 
 .card-loaner {
     text-align: center;
-    width: 100%;
+    color: white;
+    line-height: 2em;
+    margin-bottom: 0;
 }
