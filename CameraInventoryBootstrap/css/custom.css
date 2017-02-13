@@ -1,0 +1,8 @@
+.card-img-top{
+	width:100%;
+}
+
+.card{
+	/*float: inline-block;*/
+	margin-bottom: 10px;
+}
