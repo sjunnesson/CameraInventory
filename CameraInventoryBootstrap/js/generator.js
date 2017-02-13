@@ -1,15 +1,15 @@
 // Connect to deepstreamHub
 var deepClient = deepstream('wss://154.deepstreamhub.com?apiKey=7e9f4dc2-3ea1-4e76-81d3-f6eb9f8cc443');
 // Login
-deepClient.on('error', () => {
-});
+deepClient.on('error', () => {});
 deepClient.login({}, (success) => {
     console.log("Log in ", success);
-// addEquipment("Canon", "6D", "Full frame camera, great for photo");
+    // refreshAllEquipment();
 });
 const list = deepClient.record.getList('equipment');
 
 // list.removeEntry("camera1", 0)
+// list.delete();
 
 
 // const recordName = `user/${deepClient.getUid()}` // "user/iqaphzxy-2o1pnsvcnbo"
@@ -26,14 +26,17 @@ list.whenReady((list) => {
         const record = deepClient.record.getRecord(entries[i]);
 
         record.whenReady(() => {
-            console.log(record.get("brand"));
-
+            record.set("owner", "Lisa");
+            var imgURL = record.get("image");
+            if (imgURL == undefined) {
+                imgURL = "placeholder.png";
+            }
             var columWrapper = $("<div></div>").addClass("col-sm-3");
 
             var card = $("<div></div>").addClass("card");
             $(card).prepend($('<img>', {
                 id: 'theImg',
-                src: '../images/Canon_5D_Mark_III.jpg',
+                src: '../images/' + imgURL,
                 class: "card-img-top"
             }));
             var cardBlock = $("<div></div>").addClass("card-block");
@@ -96,4 +99,3 @@ list.whenReady((list) => {
 //         $("#cardWrapper").append(columWrapper);
 //     }
 // }
-
