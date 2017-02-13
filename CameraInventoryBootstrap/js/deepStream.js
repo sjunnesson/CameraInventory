@@ -16,6 +16,7 @@ function refreshAllEquipment() {
     addEquipment("Canon", "EF 24-70mm f/2.8L II USM", "Good allround lens that covers a wide range of situation. High quality build and a jack of all trades", "canon24-70.jpg");
     addEquipment("Canon", "EF 24-70mm f/2.8L II USM", "Good allround lens that covers a wide range of situation. High quality build and a jack of all trades", "canon24-70.jpg");
     addEquipment("Canon", "EF 24-70mm f/2.8L II USM", "Good allround lens that covers a wide range of situation. High quality build and a jack of all trades", "canon24-70.jpg");
+    addEquipment("Canon", "70-200 f/4", "Tele zoom to get those birds far far away", "canon_70-200_f4.jpg");
     addEquipment("Canon", "5D Mark iii", "Workhorse for both video and photo", "canon5diii.jpg");
     addEquipment("Canon", "5D Mark ii", "Workhorse for both video and photo. Getting a bit old now. Get it's updated sibbling if you can", "canon5dii.jpg");
     addEquipment("Canon", "5D SR", "Extra high resolution, primarily still photo such as landscape and studio", "canon5dsr.jpg");
@@ -28,6 +29,10 @@ function refreshAllEquipment() {
     addEquipment("GoPro", "Hero 2", "Action camera which is easy to mount to anything, older version", "hero2.jpg");
     addEquipment("Brinno", "Garden Watch camera", "Timelapse camera", "brinno_garden.jpg");
     addEquipment("Sigma", "35mm f/1.4", "Fixed lens good for capturing a scene or when darker", "sigma_35.jpg");
+    addEquipment("Metz", "48 AF-1", "On camera flash", "metz_48.jpg");
+    addEquipment("Proxistar", "PS-MF-48W", "Studio flash", "proxistar.jpg");
+    addEquipment("Esprit", "GM 125", "Studio flash", "espritgm125.jpg");
+    addEquipment("Canon", "HF20", "Handheld video camera, good to record more then 30min videos", "canon_hf20.jpg");
 }
 
 function updateData(record) {
