@@ -1,10 +1,14 @@
+var filterCategories = ["camera", "lens", "videoCamera", "specialCamera", "accessory", "studio"];
+var filterCategoriesNice = ["Camera", "Lens", "Video camera", "Special camera", "Accessory", "Studio"];
+
 // Connect to deepstreamHub
 var deepClient = deepstream('wss://154.deepstreamhub.com?apiKey=7e9f4dc2-3ea1-4e76-81d3-f6eb9f8cc443');
 // Login
-deepClient.on('error', () => {});
+deepClient.on('error', () => {
+});
 deepClient.login({}, (success) => {
     console.log("Log in ", success);
-    // refreshAllEquipment();
+// refreshAllEquipment();
 });
 const list = deepClient.record.getList('equipment');
 
@@ -13,8 +17,6 @@ const list = deepClient.record.getList('equipment');
 
 list.whenReady((list) => {
     var entries = list.getEntries();
-    // console.log(entries);
-
 
     for (var i = 0; i < entries.length; i++) {
         const record = deepClient.record.getRecord(entries[i]);
@@ -25,8 +27,10 @@ list.whenReady((list) => {
                 imgURL = "placeholder.png";
             }
             var columWrapper = $("<div></div>").addClass("col-sm-3");
+            $(columWrapper).data("category", record.get("category"));
 
-            var card = $("<div></div>").addClass("card");
+
+            var card = $("<div></div>").addClass("card card-custom");
 
             $(card).prepend($('<img>', {
                 id: 'theImg',
@@ -45,25 +49,68 @@ list.whenReady((list) => {
                 class: "card-text"
             }));
 
+            // if (record.get("owner") != "unknown") {
+            var loaner = $('<div></div>', {
 
-            if (record.get("owner") != "unknown") {
-                var loaner = $('<p>', {
-                    text: "Loaned to: " + record.get("owner"),
-                    class: "card-loaner"
-                });
-                loaner.addClass("status-unavailable");
-                $(cardBlock).append(loaner);
-            }
+                class: "card-foot"
+            });
+            var loanerContent = $('<small></small>', {
+                text: "Loaned to: " + record.get("owner"),
+                class: "text-muted"
+            });
+            loaner.append(loanerContent);
 
+            // loaner.addClass("status-unavailable");
+            $(cardBlock).append(loaner);
+            // }
 
             $(card).append(cardBlock);
             $(columWrapper).append(card);
 
             $("#cardWrapper").append(columWrapper);
+            record.subscribe(statusChanged);
+
         });
     }
-    const record = deepClient.record.getRecord(entries[0]);
-    record.set("rfid", 54321);
-    console.log(record);
-
+// const record = deepClient.record.getRecord(entries[0]);
+// record.set("rfid", 54321);
+// console.log(record);
 });
+
+function statusChanged(status) {
+    console.log(status);
+// if()
+}
+
+
+function createFilterButtons() {
+    for (var i = filterCategories.length - 1; i >= 0; i--) {
+        var button = $("<button></button>").addClass("btn btn-info btn-sm ds_btn-custom-filter");
+        button.text(filterCategoriesNice[i]);
+        button.data("id", filterCategories[i]);
+        $("#filterSection").prepend(button);
+    }
+    var button = $("<button></button>").addClass("btn btn-info btn-sm ds_btn-custom-filter");
+    button.text("All");
+    button.data("id", "all");
+    $("#filterSection").prepend(button);
+}
+createFilterButtons();
+
+$("button").click(function() {
+    filterOnCategory($(this).data("id"));
+});
+
+function filterOnCategory(category) {
+    $('#cardWrapper').children().each(function() {
+        if (category != "all") {
+            if ($(this).data("category") != category) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        } else {
+            $(this).show();
+        }
+    });
+}
