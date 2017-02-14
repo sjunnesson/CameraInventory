@@ -5,6 +5,11 @@
 .card {
     /*float: inline-block;*/
     margin-bottom: 10px;
+    	box-shadow:0px 5px 20px -5px rgba(0, 0, 0, 0.3);
+    	padding-top: 10px;
+    	padding-right: 10px;
+    	padding-left: 10px;
+
 }
 
 .status-available {
@@ -20,4 +25,8 @@
     color: white;
     line-height: 2em;
     margin-bottom: 0;
+}
+
+.ds_btn-custom-filter{
+	margin: 5px !important;
 }
